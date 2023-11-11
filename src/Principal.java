@@ -27,8 +27,12 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuOPCIONES = new javax.swing.JMenu();
+        jMenuItemAGREGAR = new javax.swing.JMenuItem();
+        jMenuItemMODIFICAR = new javax.swing.JMenuItem();
+        javax.swing.JMenuItem jMenuItemELIMINAR = new javax.swing.JMenuItem();
+        jMenuItemLISTAR = new javax.swing.JMenuItem();
+        jMenuSALIR = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,11 +49,30 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 254, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenuOPCIONES.setText("Opciones");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItemAGREGAR.setText("Agregar Película");
+        jMenuItemAGREGAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAGREGARActionPerformed(evt);
+            }
+        });
+        jMenuOPCIONES.add(jMenuItemAGREGAR);
+
+        jMenuItemMODIFICAR.setText("Modificar Película");
+        jMenuOPCIONES.add(jMenuItemMODIFICAR);
+
+        jMenuItemELIMINAR.setText("Eliminar Película");
+        jMenuOPCIONES.add(jMenuItemELIMINAR);
+
+        jMenuItemLISTAR.setText("Listar Película");
+        jMenuItemLISTAR.setToolTipText("");
+        jMenuOPCIONES.add(jMenuItemLISTAR);
+
+        jMenuBar1.add(jMenuOPCIONES);
+
+        jMenuSALIR.setText("Salir");
+        jMenuBar1.add(jMenuSALIR);
 
         setJMenuBar(jMenuBar1);
 
@@ -72,6 +95,10 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemAGREGARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAGREGARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemAGREGARActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,9 +136,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAGREGAR;
+    private javax.swing.JMenuItem jMenuItemLISTAR;
+    private javax.swing.JMenuItem jMenuItemMODIFICAR;
+    private javax.swing.JMenu jMenuOPCIONES;
+    private javax.swing.JMenu jMenuSALIR;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
