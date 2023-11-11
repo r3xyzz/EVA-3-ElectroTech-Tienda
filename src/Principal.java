@@ -8,12 +8,13 @@
  * @author r3xzz
  */
 public class Principal extends javax.swing.JFrame {
-
+    AgregarProducto AgregarP = new AgregarProducto();
     /**
      * Creates new form interfaz
      */
     public Principal() {
         initComponents();
+        this.add(AgregarP);
     }
 
     /**
@@ -97,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemAGREGARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAGREGARActionPerformed
-        // TODO add your handling code here:
+        this.AgregarP.show();
     }//GEN-LAST:event_jMenuItemAGREGARActionPerformed
 
     /**
