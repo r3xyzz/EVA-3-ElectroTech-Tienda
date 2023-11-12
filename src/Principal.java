@@ -102,6 +102,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSALIRActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuItemSALIRActionPerformed
 
     /**
