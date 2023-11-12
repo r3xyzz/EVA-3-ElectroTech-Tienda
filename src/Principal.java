@@ -73,6 +73,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenuOPCIONES);
 
         jMenuSALIR.setText("Salir");
+        jMenuSALIR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSALIRActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenuSALIR);
 
         setJMenuBar(jMenuBar1);
@@ -100,6 +105,11 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemAGREGARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAGREGARActionPerformed
         this.AgregarP.show();
     }//GEN-LAST:event_jMenuItemAGREGARActionPerformed
+
+    private void jMenuSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSALIRActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuSALIRActionPerformed
 
     /**
      * @param args the command line arguments
