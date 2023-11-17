@@ -12,6 +12,7 @@ import java.sql.SQLException;
 /**
  *
  * @author r3xzz
+ * @author araceli
  */
 public class Product {
     private String nombre, marca, categoria;
