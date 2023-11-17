@@ -10,6 +10,8 @@
 import Negocio.Product;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import java.text.ParseException;
 
 public class AgregarProducto extends javax.swing.JInternalFrame {
 
@@ -245,7 +247,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             String fechaText = this.txtFecha.getText();
             
             if(nombre.isEmpty() || marca.isEmpty() || marca.isEmpty() || categoria.isEmpty() || precioText.isEmpty()){ // validar que NO ESTÉ VACÍO :-P
-                System.out.println("Por favor, INGRESE en los campos");
+                JOptionPane.showMessageDialog(this,"Por favor, INGRESE DATOS en los campos.","ERROR",2);
             }else{
                 try{
                     // CONVERSIÓN DE STRING A DATOS RESPECTIVOS!!!! GUAU!!!!!
@@ -259,14 +261,17 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     
                     
                     Product p = new Product(nombre,marca,categoria,precio,cantidadEnStock,fecha);
-                    // String nombre, String marca, String categoria, int precio, int cantidadEnStock, Date fecha
+                    
                     p.agregarProducto();
                 }catch (NumberFormatException e){
-                    System.out.println("Los campos: PRECIO, debe ser NÚMERICOS");
+                    JOptionPane.showMessageDialog(this,"Los campos PRECIO y CANTIDAD EN STOCK debe ser NÚMERICOS.","ERROR",2);
+                    //JOptionPane.showMessageDialog(this, "Los campos año y duración deben ser números", "Completar Año y Duración", 2);
+                }catch (ParseException e){
+                    JOptionPane.showMessageDialog(this, "El campo FECHA debe ser aaaa-mm-dd", "ERROR", 2);
                 }
             }
         }catch (Exception e){
-            System.out.println("ERROR al agregado de PRODUCTOS. No se hicieron cambios.");
+            JOptionPane.showMessageDialog(this, "ERROR al agregado de PRODUCTOS, no se hicieron cambios.", "ERROR", 2);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
