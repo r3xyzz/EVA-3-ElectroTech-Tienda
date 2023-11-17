@@ -4,11 +4,13 @@
  */
 package Negocio;
 
+import electrotech.ElectroTech;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 /**
  *
  * @author r3xzz
@@ -16,7 +18,7 @@ import java.sql.SQLException;
  */
 public class Product {
     private String nombre, marca, categoria;
-    private int precio, cantidadEnStock;
+    private int id, precio, cantidadEnStock;
     private Date fecha;
     
     //const sin parametro
@@ -78,11 +80,36 @@ public class Product {
         return fecha;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //getter y setter
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    public boolean validarNombre(String nombre) {
+        try {
+            String sql = "select count(*) as count from product where nombre = '"+nombre+"'";
+            ElectroTech.conectar();
+            ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
+            ResultSet res = ElectroTech.sentencia.executeQuery(sql);
+            
+            res.next();
+            int count = res.getInt("count");
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("Error");  
+            return false;
+        }
+    }
+    
     // metodo custom agregar
     // Método custom para agregar un producto a la base de datos
     public void agregarProducto() {
