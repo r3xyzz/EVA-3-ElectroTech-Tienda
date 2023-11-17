@@ -20,16 +20,13 @@ public class ElectroTech {
 
     public static void main(String[] args) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver"); // com.mysql.cj.jdbc.Driver
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
             System.out.println("Conexion Exitosa");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
-    // erm lo que hice aquí se hace después de hacer todo el tandeo de settear los programas y crear la tabla
-    // y crear la DATABASE
 
     public static void desconectar() throws SQLException{
         conexion.close();
