@@ -18,7 +18,7 @@ public class ElectroTech {
     public static Connection conexion = null;
     public static Statement sentencia;
 
-    public static void main(String[] args) {
+    public static void conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // com.mysql.cj.jdbc.Driver
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
