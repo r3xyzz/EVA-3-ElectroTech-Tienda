@@ -7,8 +7,10 @@
  *
  * @author Matelunaaa
  */
+import Negocio.Product;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import producto.Product;
+
 public class AgregarProducto extends javax.swing.JInternalFrame {
 
     /**
@@ -238,11 +240,16 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     // CONVERSIÓN DE STRING A DATOS RESPECTIVOS!!!! GUAU!!!!!
                     int precio = Integer.parseInt(precioText); 
                     int cantidadEnStock = Integer.parseInt(cantidadEnStockText); 
-                    //Date fecha = Date.parse(fechaText);
+                    
+                    // CONVERSIÓN FECHA
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fecha = formato.parse(fechaText);
                     
                     
-                    //Product p = new Product(nombre,marca,categoria,precio,cantidadEnStock);
-                    //p.agregarProducto();
+                    
+                    Product p = new Product(nombre,marca,categoria,precio,cantidadEnStock,fecha);
+                    // String nombre, String marca, String categoria, int precio, int cantidadEnStock, Date fecha
+                    p.agregarProducto();
                 }catch (NumberFormatException e){
                     System.out.println("Los campos: PRECIO, debe ser NÚMERICOS");
                 }
