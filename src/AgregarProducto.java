@@ -263,6 +263,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     Product p = new Product(nombre,marca,categoria,precio,cantidadEnStock,fecha);
                     
                     p.agregarProducto();
+                    JOptionPane.showMessageDialog(this, "Producto AGREGADO éxitosamente", "ÉXITO", 2);
                 }catch (NumberFormatException e){
                     JOptionPane.showMessageDialog(this,"Los campos PRECIO y CANTIDAD EN STOCK debe ser NÚMERICOS.","ERROR",2);
                     //JOptionPane.showMessageDialog(this, "Los campos año y duración deben ser números", "Completar Año y Duración", 2);
