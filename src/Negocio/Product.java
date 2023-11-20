@@ -142,7 +142,7 @@ public class Product {
         conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
 
         // Consulta SQL para eliminar el producto por nombre
-        String query = "DELETE FROM PRODUCT WHERE Nombre = ?";
+        String query = "DELETE FROM PRODUCT WHERE ID = ?";
 
         // Preparar la declaración
         pst = conexion.prepareStatement(query);

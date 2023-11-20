@@ -91,6 +91,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItemLISTAR.setText("Listar Producto");
         jMenuItemLISTAR.setToolTipText("");
+        jMenuItemLISTAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLISTARActionPerformed(evt);
+            }
+        });
         jMenuOPCIONES.add(jMenuItemLISTAR);
 
         jMenuBar1.add(jMenuOPCIONES);
@@ -145,11 +150,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemELIMINARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemELIMINARActionPerformed
         // TODO add your handling code here:
-    String nombreProducto = JOptionPane.showInputDialog(this, "Ingrese el nombre del producto a eliminar:");
+    String idProducto = JOptionPane.showInputDialog(this, "Ingrese el ID del producto a eliminar:");
 
-    if (nombreProducto != null && !nombreProducto.isEmpty()) {
+    if (idProducto != null && !idProducto.isEmpty()) {
         Product productoAEliminar = new Product();
-        boolean eliminado = productoAEliminar.eliminarProducto(nombreProducto);
+        boolean eliminado = productoAEliminar.eliminarProducto(idProducto);
 
         if (eliminado) {
             JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.");
@@ -160,6 +165,10 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Nombre de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_jMenuItemELIMINARActionPerformed
+
+    private void jMenuItemLISTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLISTARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemLISTARActionPerformed
 
     /**
      * @param args the command line arguments
