@@ -119,7 +119,7 @@ public class Product {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             String fechaFormateada = formato.format(fecha);
         
-            String sql = "INSERT INTO PRODUCT (Nombre, Marca, Categoria, Precios, Cantidad_Stock, Fecha_Adquisicion) VALUES ('"+nombre+"', '"+marca+"', '"+categoria+"',"+precio+", "+cantidadEnStock+",'"+fechaFormateada+"')";
+            String sql = "INSERT INTO PRODUCT (Nombre, Marca, Categoria, Precios, CantidadEnStock, FechaDeAdquisicion) VALUES ('"+nombre+"', '"+marca+"', '"+categoria+"',"+precio+", "+cantidadEnStock+",'"+fechaFormateada+"')";
 
             ElectroTech.conectar();
             ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);

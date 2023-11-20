@@ -59,9 +59,9 @@ public class Principal extends javax.swing.JFrame {
         FonditoLayout.setHorizontalGroup(
             FonditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FonditoLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
+                .addGap(89, 89, 89)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(102, 102, 102))
         );
         FonditoLayout.setVerticalGroup(
             FonditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
