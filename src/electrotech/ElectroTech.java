@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -15,16 +16,21 @@ import java.sql.Statement;
  */
 public class ElectroTech {
 
-    public static Connection conexion = null;
-    public static Statement sentencia;
+    public static Connection conexion;
+    public static PreparedStatement sentencia;
 
     public static void conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // com.mysql.cj.jdbc.Driver
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
-            System.out.println("Conexion Exitosa");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            if (conexion != null){
+                System.out.println("Conexión establecida con exito");
+            }      
+        } catch (SQLException e) {
+            System.out.println("Error en la conexión");
+            //System.out.println(e.getMessage());
+        }catch (ClassNotFoundException e){
+            System.out.println("e");
         }
     }
 

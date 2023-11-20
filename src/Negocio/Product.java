@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author r3xzz
@@ -113,51 +114,27 @@ public class Product {
     // metodo custom agregar
     // Método custom para agregar un producto a la base de datos
     public void agregarProducto() {
-        Connection conexion = null;
-        PreparedStatement pst = null;
+        try{
+                       
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaFormateada = formato.format(fecha);
+        
+            String sql = "INSERT INTO PRODUCT (Nombre, Marca, Categoria, Precio, Cantidad_Stock, Fecha_Adquisicion) VALUES ('"+nombre+"', '"+marca+"', '"+categoria+"',"+precio+", "+cantidadEnStock+",'"+fechaFormateada+"')";
 
-        try {
-            // Establecer conexión a la base de datos
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
-
-            // Consulta SQL para insertar un nuevo producto
-            String query = "INSERT INTO PRODUCT (Nombre, Marca, Categoria, Precio, Cantidad_Stock, Fecha_Adquisicion) VALUES (?, ?, ?, ?, ?,?)";
-
-            // Preparar la declaración
-            pst = conexion.prepareStatement(query);
-
-            // Establecer los valores de los parámetros
-            pst.setString(1, this.nombre);
-            pst.setString(2, this.marca);
-            pst.setString(3,this.categoria);
-            pst.setInt(4, this.precio);
-            pst.setInt(5, this.cantidadEnStock);
-            pst.setDate(6, (java.sql.Date) this.fecha);
-
-            // Ejecutar la consulta
-            pst.executeUpdate();
-
-            System.out.println("Producto agregado exitosamente");
-        } catch (SQLException e) {
-            System.out.println("Error al agregar el producto: " + e.getMessage());
-        } finally {
-            // Cerrar recursos
-            try {
-                if (pst != null) {
-                    pst.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
-            }
+            ElectroTech.conectar();
+            ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
+            ElectroTech.sentencia.execute(sql);
+            System.out.println("Datos Almacenados");
+            ElectroTech.desconectar();
+        }catch (Exception e){
+            System.out.println(e);
+            System.out.println("Error al agregar pelicula");
         }
     }
 
     // Método custom para eliminar un producto de la base de datos
     public boolean eliminarProducto(String nombre) {
-    Connection conexion = null;
+    Connection conexion = null; // ElectroTech.conexion
     PreparedStatement pst = null;
 
     try {
