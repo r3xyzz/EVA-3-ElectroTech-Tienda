@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import javax.swing.JOptionPane;
+import Negocio.Product;
 /**
  *
  * @author r3xzz
@@ -51,8 +52,6 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Captura02.png"))); // NOI18N
-
         Fondito.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout FonditoLayout = new javax.swing.GroupLayout(Fondito);
@@ -83,6 +82,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuOPCIONES.add(jMenuItemMODIFICAR);
 
         jMenuItemELIMINAR.setText("Eliminar Producto");
+        jMenuItemELIMINAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemELIMINARActionPerformed(evt);
+            }
+        });
         jMenuOPCIONES.add(jMenuItemELIMINAR);
 
         jMenuItemLISTAR.setText("Listar Producto");
@@ -138,6 +142,24 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSALIRActionPerformed
+
+    private void jMenuItemELIMINARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemELIMINARActionPerformed
+        // TODO add your handling code here:
+    String nombreProducto = JOptionPane.showInputDialog(this, "Ingrese el nombre del producto a eliminar:");
+
+    if (nombreProducto != null && !nombreProducto.isEmpty()) {
+        Product productoAEliminar = new Product();
+        boolean eliminado = productoAEliminar.eliminarProducto(nombreProducto);
+
+        if (eliminado) {
+            JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un producto con ese nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Nombre de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jMenuItemELIMINARActionPerformed
 
     /**
      * @param args the command line arguments
