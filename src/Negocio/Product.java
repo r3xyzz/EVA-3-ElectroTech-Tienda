@@ -154,6 +154,51 @@ public class Product {
             }
         }
     }
+
+    // Método custom para eliminar un producto de la base de datos
+    public boolean eliminarProducto(String nombre) {
+    Connection conexion = null;
+    PreparedStatement pst = null;
+
+    try {
+        // Establecer conexión a la base de datos
+        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+
+        // Consulta SQL para eliminar el producto por nombre
+        String query = "DELETE FROM PRODUCT WHERE Nombre = ?";
+
+        // Preparar la declaración
+        pst = conexion.prepareStatement(query);
+
+        // Establecer el valor del parámetro
+        pst.setString(1, nombre);
+
+        // Ejecutar la consulta
+        int filasAfectadas = pst.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            System.out.println("Producto eliminado exitosamente");
+            return true;
+        } else {
+            System.out.println("No se encontró un producto con ese nombre");
+            return false;
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al eliminar el producto: " + e.getMessage());
+        return false;
+    } finally {
+        // Cerrar recursos
+        try {
+            if (pst != null) {
+                pst.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+        }
+    }
 }
 
-
+}
