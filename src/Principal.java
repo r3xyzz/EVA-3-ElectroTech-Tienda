@@ -10,6 +10,7 @@ import Negocio.Product;
  */
 public class Principal extends javax.swing.JFrame {
     AgregarProducto AgregarP = new AgregarProducto();
+    ActualizarProducto ActualizarP = new ActualizarProducto();
     /**
      * Creates new form interfaz
      */
@@ -79,6 +80,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuOPCIONES.add(jMenuItemAGREGAR);
 
         jMenuItemMODIFICAR.setText("Modificar Producto");
+        jMenuItemMODIFICAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMODIFICARActionPerformed(evt);
+            }
+        });
         jMenuOPCIONES.add(jMenuItemMODIFICAR);
 
         jMenuItemELIMINAR.setText("Eliminar Producto");
@@ -169,6 +175,12 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemLISTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLISTARActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemLISTARActionPerformed
+
+    private void jMenuItemMODIFICARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMODIFICARActionPerformed
+        this.ActualizarP.show();
+        Fondito.add(ActualizarP);
+        Fondito.show();
+    }//GEN-LAST:event_jMenuItemMODIFICARActionPerformed
 
     /**
      * @param args the command line arguments
