@@ -52,6 +52,12 @@ public class ListarProducto extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Categoria:");
 
+        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCategoriaActionPerformed(evt);
+            }
+        });
+
         btnLimpiarCampo.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         btnLimpiarCampo.setText("Limpiar Campos");
         btnLimpiarCampo.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +80,12 @@ public class ListarProducto extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Cantidad Maxima $");
+
+        txtCantmax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantmaxActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jButton1.setText("Buscar");
@@ -127,13 +139,14 @@ public class ListarProducto extends javax.swing.JInternalFrame {
                     .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCanminm, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCantmax, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(txtCantmax, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)
+                        .addComponent(jLabel4)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -206,11 +219,19 @@ public class ListarProducto extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
+    private void Limpiarlista() {
 
+        this.txtCanminm.setText("");
+        this.txtCantmax.setText("");
+        this.txtCategoria.setText("");
+    }
     private void btnLimpiarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCampoActionPerformed
         // TODO add your handling code here:
+        Limpiarlista();
     }//GEN-LAST:event_btnLimpiarCampoActionPerformed
 
+    
     private void txtCanminmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCanminmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCanminmActionPerformed
@@ -218,6 +239,14 @@ public class ListarProducto extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCategoriaActionPerformed
+
+    private void txtCantmaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantmaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantmaxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -164,6 +164,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemLISTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLISTARActionPerformed
         // TODO add your handling code here:
+        ListarProducto listarProducto = new ListarProducto();
+        Fondito.add(listarProducto);
+        listarProducto.show();
     }//GEN-LAST:event_jMenuItemLISTARActionPerformed
 
     private void jMenuItemMODIFICARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMODIFICARActionPerformed
