@@ -36,7 +36,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
         txtID = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -106,7 +106,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
                 .addContainerGap(149, Short.MAX_VALUE))
         );
 
-        jLabel4.setText("...");
+        lblID.setText("...");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("ID:");
@@ -187,7 +187,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
                     .addComponent(txtCantidadenStock, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(lblID))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -195,7 +195,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblID)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,6 +296,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
         this.txtPrecio.setText("");
         this.txtCantidadenStock.setText("");
         this.txtFecha.setText("");
+        this.lblID.setText("...");
     }
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
@@ -303,6 +304,43 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+            try {
+        // Obtener el ID ingresado por el usuario
+        String idText = txtID.getText();
+
+        // Validar que se haya ingresado un ID
+        if (idText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un ID para buscar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Intentar convertir el ID a entero
+        int id = Integer.parseInt(idText);
+
+        // Obtener el producto por su ID
+        Product productoEncontrado = Product.obtenerProductoPorID(String.valueOf(id));
+
+        // Verificar si se encontró el producto
+        if (productoEncontrado != null) {
+            // Mostrar los detalles del producto en los campos de texto
+            txtNombre.setText(productoEncontrado.getNombre());
+            txtMarca.setText(productoEncontrado.getMarca());
+            txtCategoria.setText(productoEncontrado.getCategoria());
+            txtPrecio.setText(String.valueOf(productoEncontrado.getPrecio()));
+            txtCantidadenStock.setText(String.valueOf(productoEncontrado.getCantidadEnStock()));
+
+            // Convertir la fecha a texto y mostrar en el campo correspondiente
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaTexto = formatoFecha.format(productoEncontrado.getFecha());
+            txtFecha.setText(fechaTexto);
+        } else {
+            // Limpiar los campos si no se encontró el producto
+            LimpiarProducto();
+            JOptionPane.showMessageDialog(this, "No se encontró un producto con este ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -396,7 +434,6 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -405,6 +442,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblID;
     private javax.swing.JTextField txtCantidadenStock;
     private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtFecha;
