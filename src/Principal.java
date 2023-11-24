@@ -165,10 +165,10 @@ public class Principal extends javax.swing.JFrame {
         if (eliminado) {
             JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.");
         } else {
-            JOptionPane.showMessageDialog(this, "No se encontró un producto con ese nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se encontró un producto con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     } else {
-        JOptionPane.showMessageDialog(this, "Nombre de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "ID de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_jMenuItemELIMINARActionPerformed
 
