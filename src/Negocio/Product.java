@@ -134,30 +134,32 @@ public class Product {
 
     // Método custom para eliminar un producto de la base de datos
     public boolean eliminarProducto(String nombre) {
-    Connection conexion = null; // ElectroTech.conexion
-    PreparedStatement pst = null;
-
     try {
         // Establecer conexión a la base de datos
-        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+        //conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+        ElectroTech.conectar();
 
         // Consulta SQL para eliminar el producto por nombre
         String query = "DELETE FROM PRODUCT WHERE ID = ?";
 
         // Preparar la declaración
-        pst = conexion.prepareStatement(query);
+        //pst = conexion.prepareStatement(query);
+        ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(query);
+        
 
         // Establecer el valor del parámetro
-        pst.setString(1, nombre);
+        //pst.setString(1, nombre);
+        ElectroTech.sentencia.setString(1, nombre);
 
         // Ejecutar la consulta
-        int filasAfectadas = pst.executeUpdate();
+        //int filasAfectadas = pst.executeUpdate();
+        int filasAfectadas = ElectroTech.sentencia.executeUpdate();
 
         if (filasAfectadas > 0) {
             System.out.println("Producto eliminado exitosamente");
             return true;
         } else {
-            System.out.println("No se encontró un producto con ese nombre");
+            System.out.println("No se encontró un producto con este ID");
             return false;
         }
     } catch (SQLException e) {
@@ -166,11 +168,11 @@ public class Product {
     } finally {
         // Cerrar recursos
         try {
-            if (pst != null) {
-                pst.close();
+            if (ElectroTech.sentencia != null) {
+                ElectroTech.sentencia.close();
             }
-            if (conexion != null) {
-                conexion.close();
+            if (ElectroTech.conexion != null) {
+                ElectroTech.conexion.close();
             }
         } catch (SQLException ex) {
             System.out.println("Error al cerrar los recursos: " + ex.getMessage());
