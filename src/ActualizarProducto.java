@@ -3,6 +3,7 @@ import Negocio.Product;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import electrotech.ElectroTech;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -300,50 +301,51 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
         this.txtFecha.setText("");
         this.lblID.setText("...");
     }
+    
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-            try {
-        // Obtener el ID ingresado por el usuario
-        String idText = txtID.getText();
+        try {
+            // Obtener el ID ingresado por el usuario
+            String idText = txtID.getText();
 
-        // Validar que se haya ingresado un ID
-        if (idText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese un ID para buscar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            // Validar que se haya ingresado un ID
+            if (idText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese un ID para buscar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Intentar convertir el ID a entero
+            int id = Integer.parseInt(idText);
+
+            // Obtener el producto por su ID
+            Product productoEncontrado = Product.obtenerProductoPorID(String.valueOf(id));
+
+            // Verificar si se encontró el producto
+            if (productoEncontrado != null) {
+                // Mostrar los detalles del producto en los campos de texto
+                lblID.setText(String.valueOf(productoEncontrado.getId()));
+                txtNombre.setText(productoEncontrado.getNombre());
+                txtMarca.setText(productoEncontrado.getMarca());
+                txtCategoria.setText(productoEncontrado.getCategoria());
+                txtPrecio.setText(String.valueOf(productoEncontrado.getPrecio()));
+                txtCantidadenStock.setText(String.valueOf(productoEncontrado.getCantidadEnStock()));
+
+                // Convertir la fecha a texto y mostrar en el campo correspondiente
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaTexto = formatoFecha.format(productoEncontrado.getFecha());
+                txtFecha.setText(fechaTexto);
+            } else {
+                // Limpiar los campos si no se encontró el producto
+                LimpiarProducto();
+                JOptionPane.showMessageDialog(this, "No se encontró un producto con este ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Intentar convertir el ID a entero
-        int id = Integer.parseInt(idText);
-
-        // Obtener el producto por su ID
-        Product productoEncontrado = Product.obtenerProductoPorID(String.valueOf(id));
-
-        // Verificar si se encontró el producto
-        if (productoEncontrado != null) {
-            // Mostrar los detalles del producto en los campos de texto
-            lblID.setText(String.valueOf(productoEncontrado.getId()));
-            txtNombre.setText(productoEncontrado.getNombre());
-            txtMarca.setText(productoEncontrado.getMarca());
-            txtCategoria.setText(productoEncontrado.getCategoria());
-            txtPrecio.setText(String.valueOf(productoEncontrado.getPrecio()));
-            txtCantidadenStock.setText(String.valueOf(productoEncontrado.getCantidadEnStock()));
-
-            // Convertir la fecha a texto y mostrar en el campo correspondiente
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaTexto = formatoFecha.format(productoEncontrado.getFecha());
-            txtFecha.setText(fechaTexto);
-        } else {
-            // Limpiar los campos si no se encontró el producto
-            LimpiarProducto();
-            JOptionPane.showMessageDialog(this, "No se encontró un producto con este ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -371,56 +373,75 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-    try {
-        // Obtener datos ingresados por el usuario
-        String nombre = this.txtNombre.getText();
-        String marca = this.txtMarca.getText();
-        String categoria = this.txtCategoria.getText();
-        String precioText = this.txtPrecio.getText();
-        String cantidadEnStockText = this.txtCantidadenStock.getText();
-        String fechaText = this.txtFecha.getText();
-
-        // Validar que los campos requeridos no estén vacíos
-        if (nombre.isEmpty() || marca.isEmpty() || categoria.isEmpty() || precioText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método si hay campos vacíos
-        }
-
         try {
-            // Convertir precio y cantidadEnStock a números enteros
-            int precio = Integer.parseInt(precioText);
-            int cantidadEnStock = Integer.parseInt(cantidadEnStockText);
+            Date f = new Date();
+            Product productoP = new Product("x", "x", "x", 0, 0, f);
 
-            // Convertir fecha a formato Date
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha = formatoFecha.parse(fechaText);
+            productoP.setId(Integer.parseInt(this.lblID.getText()));
+            productoP.buscarID();
+            if (ElectroTech.buscarID) {
+                //se incorpora variable local id para pasarla en el metodo validarTitulo
+                int id = Integer.parseInt(this.lblID.getText());
+                String nombre = this.txtNombre.getText();
+                String marca = this.txtMarca.getText();
+                String categoria = this.txtCategoria.getText();
+                String precioText = this.txtPrecio.getText();
+                String stockText = this.txtCantidadenStock.getText();
+                String fechaText = this.txtFecha.getText();
+                if (nombre.isEmpty() || marca.isEmpty() || categoria.isEmpty() || precioText.isEmpty() ||  stockText.isEmpty()  || fechaText.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Se deben completar todos los campos", "Completar todos los campos", 2);
+                } else {
+                    try {
+                        int precio = Integer.parseInt(precioText);
+                        int stock = Integer.parseInt(stockText);
 
-            // Crear un nuevo objeto Product con los datos actualizados
-            Product productoActualizado = new Product();
-            productoActualizado.setNombre(nombre);
-            productoActualizado.setMarca(marca);
-            productoActualizado.setCategoria(categoria);
-            productoActualizado.setPrecio(precio);
-            productoActualizado.setCantidadEnStock(cantidadEnStock);
-            productoActualizado.setFecha(fecha);
+                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fecha = formato.parse(fechaText);
 
-            // Actualizar el producto en la base de datos
-            boolean actualizacionExitosa = productoActualizado.actualizarProducto();
+                        productoP.setNombre(nombre);
+                        productoP.setMarca(marca);
+                        productoP.setCategoria(categoria);
+                        productoP.setPrecio(precio);
+                        productoP.setCantidadEnStock(stock); //Puede ser que este no funcione, solo si no funciona cambiar
+                        productoP.setFecha(fecha);
+                        productoP.setId(Integer.parseInt(this.lblID.getText()));
+                        //Se incorpora ID en el parametro del metodo
+                        if (productoP.validarNombre(nombre, id)) {
+                            JOptionPane.showMessageDialog(this, "El nombre del producto ya existe", "Error", 2);
+                            //this.txtTitulo.setText("");
+                        } else {
+                            //Se agrega validación para confirmar si desea actualizar la pelicula
+                            int opcion = JOptionPane.showConfirmDialog(this, "Actualizar pelicula", "Actualizar", JOptionPane.YES_NO_OPTION, 2);
 
-            if (actualizacionExitosa) {
-                JOptionPane.showMessageDialog(this, "Producto actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            if (opcion == JOptionPane.YES_OPTION) {
+                                productoP.actualizarID();
+                                JOptionPane.showMessageDialog(this, "Producto actualizado", "Actualizar", 2);
+                                limpiar();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Producto no actualizado", "Actualizar", 2);
+                                limpiar();
+                            }
+
+                        }
+
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Los campos año y duración deben ser números", "Completar Año y Duración", 2);
+                    } catch (ParseException e) {
+                        JOptionPane.showMessageDialog(this, "El campo fecha debe ser aaaa-mm-dd", "Completar fecha", 2);
+                        this.txtFecha.setText("");
+                    }
+                }
+
             } else {
-                JOptionPane.showMessageDialog(this, "Error al actualizar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Pelicula No Actualizada", "Eliminar", 2);
+                limpiar();
             }
 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Ingrese valores numéricos válidos para Precio y Cantidad en Stock.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al procesar la actualización del producto.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error");
+            limpiar();
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+    
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
