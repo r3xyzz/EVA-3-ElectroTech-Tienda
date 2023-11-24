@@ -11,6 +11,7 @@ import Negocio.Product;
 public class Principal extends javax.swing.JFrame {
     AgregarProducto AgregarP = new AgregarProducto();
     ActualizarProducto ActualizarP = new ActualizarProducto();
+    EliminarProducto EliminarP = new EliminarProducto();
     /**
      * Creates new form interfaz
      */
@@ -156,20 +157,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemELIMINARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemELIMINARActionPerformed
         // TODO add your handling code here:
-    String idProducto = JOptionPane.showInputDialog(this, "Ingrese el ID del producto a eliminar:");
-
-    if (idProducto != null && !idProducto.isEmpty()) {
-        Product productoAEliminar = new Product();
-        boolean eliminado = productoAEliminar.eliminarProducto(idProducto);
-
-        if (eliminado) {
-            JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.");
-        } else {
-            JOptionPane.showMessageDialog(this, "No se encontró un producto con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "ID de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        this.EliminarP.show();
+        Fondito.add(EliminarP);
+        Fondito.show();
     }//GEN-LAST:event_jMenuItemELIMINARActionPerformed
 
     private void jMenuItemLISTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLISTARActionPerformed
