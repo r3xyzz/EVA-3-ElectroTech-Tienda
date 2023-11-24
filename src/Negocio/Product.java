@@ -165,58 +165,61 @@ public class Product {
     }
 
     // Método para actualizar un producto en la base de datos
-    public void actualizarProducto() {
-        Connection conexion = null;
-        PreparedStatement pst = null;
+    public boolean actualizarProducto() {
+    Connection conexion = null;
+    PreparedStatement pst = null;
 
+    try {
+        // Establecer conexión a la base de datos
+        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+
+        // Consulta SQL para actualizar el producto por ID
+        String query = "UPDATE PRODUCT SET Nombre = ?, Marca = ?, Categoria = ?, Precios = ?, CantidadEnStock = ?, FechaDeAdquisicion = ? WHERE ID = ?";
+
+        // Preparar la declaración
+        pst = conexion.prepareStatement(query);
+
+        // Establecer los valores de los parámetros
+        pst.setString(1, this.nombre);
+        pst.setString(2, this.marca);
+        pst.setString(3, this.categoria);
+        pst.setInt(4, this.precio);
+        pst.setInt(5, this.cantidadEnStock);
+
+        // Convertir la fecha a formato de texto
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaTexto = formatoFecha.format(this.fecha);
+        pst.setString(6, fechaTexto);
+
+        pst.setInt(7, this.id);
+
+        // Ejecutar la consulta
+        int filasAfectadas = pst.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            System.out.println("Producto actualizado exitosamente");
+            return true;
+        } else {
+            System.out.println("No se pudo actualizar el producto");
+            return false;
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al actualizar el producto: " + e.getMessage());
+        return false;
+    } finally {
+        // Cerrar recursos
         try {
-            // Establecer conexión a la base de datos
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
-
-            // Consulta SQL para actualizar el producto por ID
-            String query = "UPDATE PRODUCT SET Nombre = ?, Marca = ?, Categoria = ?, Precios = ?, CantidadEnStock = ?, FechaDeAdquisicion = ? WHERE ID = ?";
-
-            // Preparar la declaración
-            pst = conexion.prepareStatement(query);
-
-            // Establecer los valores de los parámetros
-            pst.setString(1, this.nombre);
-            pst.setString(2, this.marca);
-            pst.setString(3, this.categoria);
-            pst.setInt(4, this.precio);
-            pst.setInt(5, this.cantidadEnStock);
-
-            // Convertir la fecha a formato de texto
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaTexto = formatoFecha.format(this.fecha);
-            pst.setString(6, fechaTexto);
-
-            pst.setInt(7, this.id);
-
-            // Ejecutar la consulta
-            int filasAfectadas = pst.executeUpdate();
-
-            if (filasAfectadas > 0) {
-                System.out.println("Producto actualizado exitosamente");
-            } else {
-                System.out.println("No se pudo actualizar el producto");
+            if (pst != null) {
+                pst.close();
             }
-        } catch (SQLException e) {
-            System.out.println("Error al actualizar el producto: " + e.getMessage());
-        } finally {
-            // Cerrar recursos
-            try {
-                if (pst != null) {
-                    pst.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+            if (conexion != null) {
+                conexion.close();
             }
+        } catch (SQLException ex) {
+            System.out.println("Error al cerrar los recursos: " + ex.getMessage());
         }
     }
+}
     
     public boolean validarNombre(String nombre) {
         try {
