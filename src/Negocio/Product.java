@@ -166,40 +166,39 @@ public class Product {
 
     // Método para actualizar un producto en la base de datos
     public boolean actualizarProducto() {
-    Connection conexion = null;
-    PreparedStatement pst = null;
-
     try {
         // Establecer conexión a la base de datos
-        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+        //conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+        ElectroTech.conectar();
 
         // Consulta SQL para actualizar el producto por ID
         String query = "UPDATE PRODUCT SET Nombre = ?, Marca = ?, Categoria = ?, Precios = ?, CantidadEnStock = ?, FechaDeAdquisicion = ? WHERE ID = ?";
 
         // Preparar la declaración
-        pst = conexion.prepareStatement(query);
+        //pst = conexion.prepareStatement(query);
+        ElectroTech.sentencia= ElectroTech.conexion.prepareStatement(query);
 
         // Establecer los valores de los parámetros
-        pst.setString(1, this.nombre);
-        pst.setString(2, this.marca);
-        pst.setString(3, this.categoria);
-        pst.setInt(4, this.precio);
-        pst.setInt(5, this.cantidadEnStock);
+        ElectroTech.sentencia.setString(1, this.nombre);
+        ElectroTech.sentencia.setString(2, this.marca);
+        ElectroTech.sentencia.setString(3, this.categoria);
+        ElectroTech.sentencia.setInt(4, this.precio);
+        ElectroTech.sentencia.setInt(5, this.cantidadEnStock);
 
         // Convertir la fecha a formato de texto
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaTexto = formatoFecha.format(this.fecha);
-        pst.setString(6, fechaTexto);
+        ElectroTech.sentencia.setString(6, fechaTexto);
 
-        pst.setInt(7, this.id);
+        ElectroTech.sentencia.setInt(7, this.id);
 
         // Ejecutar la consulta
-        int filasAfectadas = pst.executeUpdate();
+        int filasAfectadas = ElectroTech.sentencia.executeUpdate();
 
         if (filasAfectadas > 0) {
             System.out.println("Producto actualizado exitosamente");
             return true;
-        } else {
+        }else {
             System.out.println("No se pudo actualizar el producto");
             return false;
         }
@@ -209,11 +208,11 @@ public class Product {
     } finally {
         // Cerrar recursos
         try {
-            if (pst != null) {
-                pst.close();
+            if (ElectroTech.sentencia != null) {
+                ElectroTech.sentencia.close();
             }
-            if (conexion != null) {
-                conexion.close();
+            if (ElectroTech.conexion != null) {
+                ElectroTech.conexion.close();
             }
         } catch (SQLException ex) {
             System.out.println("Error al cerrar los recursos: " + ex.getMessage());
@@ -249,7 +248,7 @@ public class Product {
             String sql = "INSERT INTO PRODUCT (Nombre, Marca, Categoria, Precios, CantidadEnStock, FechaDeAdquisicion) VALUES ('"+nombre+"', '"+marca+"', '"+categoria+"',"+precio+", "+cantidadEnStock+",'"+fechaFormateada+"')";
 
             ElectroTech.conectar();
-            ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
+            ElectroTech.sentencia= ElectroTech.conexion.prepareStatement(sql);
             ElectroTech.sentencia.execute(sql);
             System.out.println("Datos Almacenados");
             ElectroTech.desconectar();
@@ -257,6 +256,31 @@ public class Product {
             System.out.println(e);
             System.out.println("Error al agregar PRODUCTO");
         }
+    }
+    
+    public void buscarID(){
+        try{
+            ElectroTech.buscarID = false;
+            String sql = "SELECT * FROM PRODUCT WHERE ID = '"+id+"'";
+            ElectroTech.conectar();
+            ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
+            ResultSet res = ElectroTech.sentencia.executeQuery(sql);
+            if (res.next()){
+                ElectroTech.buscarID = true;
+                id = Integer.parseInt(res.getString(1));
+                nombre = res.getString(2);
+                marca = res.getString(3);
+                categoria = res.getString(4);
+                precio = Integer.parseInt(res.getString(5));
+                cantidadEnStock = Integer.parseInt(res.getString(6));
+                fecha = res.getDate(7);
+            }
+            ElectroTech.desconectar();
+        }catch(Exception e){
+            System.out.println("ERROR al buscar ID");
+
+        }
+
     }
 
     // Método custom para eliminar un producto de la base de datos

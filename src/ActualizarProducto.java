@@ -325,6 +325,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
         // Verificar si se encontró el producto
         if (productoEncontrado != null) {
             // Mostrar los detalles del producto en los campos de texto
+            lblID.setText(String.valueOf(productoEncontrado.getId()));
             txtNombre.setText(productoEncontrado.getNombre());
             txtMarca.setText(productoEncontrado.getMarca());
             txtCategoria.setText(productoEncontrado.getCategoria());

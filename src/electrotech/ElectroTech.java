@@ -19,6 +19,8 @@ public class ElectroTech {
     public static Connection conexion;
     public static PreparedStatement sentencia;
 
+    public static boolean buscarID;
+    
     public static void conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // com.mysql.cj.jdbc.Driver
