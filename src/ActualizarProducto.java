@@ -329,33 +329,56 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        try {
-            String nombre = this.txtNombre.getText();
-            String marca = this.txtMarca.getText();
-            String categoria = this.txtCategoria.getText();
-            String precioText = this.txtPrecio.getText();
-            String cantidadEnStockText = this.txtCantidadenStock.getText();
-            String fechaText = this.txtFecha.getText();
+    try {
+        // Obtener datos ingresados por el usuario
+        String nombre = this.txtNombre.getText();
+        String marca = this.txtMarca.getText();
+        String categoria = this.txtCategoria.getText();
+        String precioText = this.txtPrecio.getText();
+        String cantidadEnStockText = this.txtCantidadenStock.getText();
+        String fechaText = this.txtFecha.getText();
 
-            if (nombre.isEmpty() || marca.isEmpty() || marca.isEmpty() || categoria.isEmpty() || precioText.isEmpty()) { // validar que NO ESTÉ VACÍO :-P
-                JOptionPane.showMessageDialog(this, "Por favor, INGRESE DATOS en los campos.", "ERROR", 2);
-            } else {
-                try {
-                    // CONVERSIÓN DE STRING A DATOS RESPECTIVOS!!!! GUAU!!!!!
-                    int precio = Integer.parseInt(precioText);
-                    int cantidadEnStock = Integer.parseInt(cantidadEnStockText);
-
-                    // CONVERSIÓN FECHA
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                    Date fecha = formato.parse(fechaText);
-
-                } catch (Exception e) {
-
-                }
-            }
-        } catch (Exception e) {
-
+        // Validar que los campos requeridos no estén vacíos
+        if (nombre.isEmpty() || marca.isEmpty() || categoria.isEmpty() || precioText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si hay campos vacíos
         }
+
+        try {
+            // Convertir precio y cantidadEnStock a números enteros
+            int precio = Integer.parseInt(precioText);
+            int cantidadEnStock = Integer.parseInt(cantidadEnStockText);
+
+            // Convertir fecha a formato Date
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha = formatoFecha.parse(fechaText);
+
+            // Crear un nuevo objeto Product con los datos actualizados
+            Product productoActualizado = new Product();
+            productoActualizado.setNombre(nombre);
+            productoActualizado.setMarca(marca);
+            productoActualizado.setCategoria(categoria);
+            productoActualizado.setPrecio(precio);
+            productoActualizado.setCantidadEnStock(cantidadEnStock);
+            productoActualizado.setFecha(fecha);
+
+            // Actualizar el producto en la base de datos
+            boolean actualizacionExitosa = productoActualizado.actualizarProducto();
+
+            if (actualizacionExitosa) {
+                JOptionPane.showMessageDialog(this, "Producto actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese valores numéricos válidos para Precio y Cantidad en Stock.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al procesar la actualización del producto.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error inesperado.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

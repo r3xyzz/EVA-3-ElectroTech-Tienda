@@ -6,12 +6,13 @@ package Negocio;
 
 import electrotech.ElectroTech;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author r3xzz
@@ -94,6 +95,129 @@ public class Product {
         this.fecha = fecha;
     }
 
+    // Método para obtener un producto por su ID
+    public static Product obtenerProductoPorID(String id) {
+        Connection conexion = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            // Establecer conexión a la base de datos
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+
+            // Consulta SQL para obtener el producto por ID
+            String query = "SELECT * FROM PRODUCT WHERE ID = ?";
+
+            // Preparar la declaración
+            pst = conexion.prepareStatement(query);
+
+            // Establecer el valor del parámetro
+            pst.setString(1, id);
+
+            // Ejecutar la consulta
+            rs = pst.executeQuery();
+
+            // Verificar si se encontró el producto
+            if (rs.next()) {
+                // Crear un objeto Product con los datos obtenidos de la base de datos
+                Product productoEncontrado = new Product();
+                productoEncontrado.setId(rs.getInt("ID"));
+                productoEncontrado.setNombre(rs.getString("Nombre"));
+                productoEncontrado.setMarca(rs.getString("Marca"));
+                productoEncontrado.setCategoria(rs.getString("Categoria"));
+                productoEncontrado.setPrecio(rs.getInt("Precios"));
+                productoEncontrado.setCantidadEnStock(rs.getInt("CantidadEnStock"));
+
+                // Convertir la fecha de texto a Date
+                String fechaTexto = rs.getString("FechaDeAdquisicion");
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date fecha = formatoFecha.parse(fechaTexto);
+                    productoEncontrado.setFecha(fecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                return productoEncontrado;
+            } else {
+                // No se encontró un producto con ese ID
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el producto por ID: " + e.getMessage());
+            return null;
+        } finally {
+            // Cerrar recursos
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+            }
+        }
+    }
+
+    // Método para actualizar un producto en la base de datos
+    public void actualizarProducto() {
+        Connection conexion = null;
+        PreparedStatement pst = null;
+
+        try {
+            // Establecer conexión a la base de datos
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ElectroTech", "root", "");
+
+            // Consulta SQL para actualizar el producto por ID
+            String query = "UPDATE PRODUCT SET Nombre = ?, Marca = ?, Categoria = ?, Precios = ?, CantidadEnStock = ?, FechaDeAdquisicion = ? WHERE ID = ?";
+
+            // Preparar la declaración
+            pst = conexion.prepareStatement(query);
+
+            // Establecer los valores de los parámetros
+            pst.setString(1, this.nombre);
+            pst.setString(2, this.marca);
+            pst.setString(3, this.categoria);
+            pst.setInt(4, this.precio);
+            pst.setInt(5, this.cantidadEnStock);
+
+            // Convertir la fecha a formato de texto
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaTexto = formatoFecha.format(this.fecha);
+            pst.setString(6, fechaTexto);
+
+            pst.setInt(7, this.id);
+
+            // Ejecutar la consulta
+            int filasAfectadas = pst.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Producto actualizado exitosamente");
+            } else {
+                System.out.println("No se pudo actualizar el producto");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el producto: " + e.getMessage());
+        } finally {
+            // Cerrar recursos
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+            }
+        }
+    }
+    
     public boolean validarNombre(String nombre) {
         try {
             String sql = "select count(*) as count from product where nombre = '"+nombre+"'";
