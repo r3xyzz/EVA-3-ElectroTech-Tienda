@@ -50,6 +50,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         txtFecha = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jPanel1.setBackground(new java.awt.Color(218, 35, 72));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N

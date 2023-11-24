@@ -34,6 +34,8 @@ public class ListarProducto extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
 
+        setClosable(true);
+
         jPanel1.setBackground(new java.awt.Color(255, 51, 51));
 
         txtListarProducto.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
