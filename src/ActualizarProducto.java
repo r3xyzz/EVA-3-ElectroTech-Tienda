@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import electrotech.ElectroTech;
+import java.text.ParseException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -224,11 +225,12 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 255));
 
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +238,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,20 +251,20 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(441, 441, 441)
-                .addComponent(btnLimpiar)
-                .addGap(139, 139, 139)
-                .addComponent(btnActualizar)
-                .addContainerGap(526, Short.MAX_VALUE))
+                .addGap(236, 236, 236)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(238, 238, 238))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnLimpiar))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -380,7 +383,7 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
             productoP.setId(Integer.parseInt(this.lblID.getText()));
             productoP.buscarID();
             if (ElectroTech.buscarID) {
-                //se incorpora variable local id para pasarla en el metodo validarTitulo
+                
                 int id = Integer.parseInt(this.lblID.getText());
                 String nombre = this.txtNombre.getText();
                 String marca = this.txtMarca.getText();
@@ -411,15 +414,15 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
                             //this.txtTitulo.setText("");
                         } else {
                             //Se agrega validación para confirmar si desea actualizar la pelicula
-                            int opcion = JOptionPane.showConfirmDialog(this, "Actualizar pelicula", "Actualizar", JOptionPane.YES_NO_OPTION, 2);
+                            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea confirmar actualización?", "Actualizar", JOptionPane.YES_NO_OPTION, 2);
 
                             if (opcion == JOptionPane.YES_OPTION) {
                                 productoP.actualizarID();
                                 JOptionPane.showMessageDialog(this, "Producto actualizado", "Actualizar", 2);
-                                limpiar();
+                                LimpiarProducto(); // LimpiarProducto()
                             } else {
                                 JOptionPane.showMessageDialog(this, "Producto no actualizado", "Actualizar", 2);
-                                limpiar();
+                                LimpiarProducto();
                             }
 
                         }
@@ -433,13 +436,13 @@ public class ActualizarProducto extends javax.swing.JInternalFrame {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Pelicula No Actualizada", "Eliminar", 2);
-                limpiar();
+                JOptionPane.showMessageDialog(this, "Producto No Actualizado", "Eliminar", 2);
+                LimpiarProducto();
             }
 
         } catch (Exception e) {
             System.out.println("Error");
-            limpiar();
+            LimpiarProducto();
         }
     
     }//GEN-LAST:event_btnActualizarActionPerformed

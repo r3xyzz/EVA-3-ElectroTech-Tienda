@@ -31,11 +31,8 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnBuscarID = new javax.swing.JButton();
-        btnBuscarN = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -45,14 +42,15 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lblID = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        lblMarca = new javax.swing.JLabel();
         lblCategoria = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         lblStock = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
+        lblNom = new javax.swing.JLabel();
+        lblMar = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnEliminarProducto = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -64,18 +62,9 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("ID:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Nombre:");
-
         txtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIDActionPerformed(evt);
-            }
-        });
-
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
             }
         });
 
@@ -86,8 +75,6 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnBuscarN.setText("Buscar");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,39 +84,25 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarN))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarID)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarID)))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(btnBuscarID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarN))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -157,10 +130,6 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
 
         lblID.setText("...");
 
-        lblNombre.setText("...");
-
-        lblMarca.setText("...");
-
         lblCategoria.setText("...");
 
         lblPrecio.setText("...");
@@ -168,6 +137,10 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
         lblStock.setText("...");
 
         lblFecha.setText("...");
+
+        lblNom.setText("...");
+
+        lblMar.setText("...");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -186,12 +159,12 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblID)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCategoria)
                     .addComponent(lblPrecio)
                     .addComponent(lblStock)
-                    .addComponent(lblFecha))
+                    .addComponent(lblFecha)
+                    .addComponent(lblNom)
+                    .addComponent(lblMar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -204,11 +177,11 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(lblNombre))
+                    .addComponent(lblNom))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(lblMarca))
+                    .addComponent(lblMar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -225,7 +198,7 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblFecha))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 255));
@@ -238,21 +211,33 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(359, 359, 359)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(btnLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEliminarProducto)
-                .addContainerGap(425, Short.MAX_VALUE))
+                .addGap(147, 147, 147))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(btnEliminarProducto)
-                .addGap(21, 21, 21))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnEliminarProducto))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,32 +257,46 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
+    private void LimpiarProducto() {
+        this.lblNom.setText("...");
+        this.lblMar.setText("...");
+        this.lblCategoria.setText("...");
+        this.lblPrecio.setText("...");
+        this.lblStock.setText("...");
+        this.lblFecha.setText("...");
+        this.lblID.setText("...");
+    }
+    
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
         // TODO add your handling code here:
         String idProducto = this.txtID.getText();
         
         if (idProducto!= null && !idProducto.isEmpty()){
             Product productoAEliminar = new Product();
-            boolean eliminado = productoAEliminar.eliminarProducto(idProducto);
             
-            if (eliminado){
+            int opcion = JOptionPane.showConfirmDialog(this,"¿Desea confirmar eliminación?","ELIMINACIÓN",JOptionPane.YES_NO_OPTION, 2);
+            
+            boolean eliminado = false; // inicializado:-3
+            if (opcion == JOptionPane.YES_OPTION){
+                eliminado = productoAEliminar.eliminarProducto(idProducto);
+                if (eliminado){
                 JOptionPane.showMessageDialog(this, "Producto ELIMINADO exitosamente.");
+                LimpiarProducto();
+                }else{
+                    JOptionPane.showMessageDialog(this, "No se encontró un producto con ese ID.","Error",JOptionPane.ERROR_MESSAGE);
+                }
             }else{
-                JOptionPane.showMessageDialog(this, "No se encontró un producto con ese ID.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Producto NO ELIMINADO.");
             }
         }else{
             JOptionPane.showMessageDialog(this, "ID de producto INVÁLIDO.","Error",JOptionPane.ERROR_MESSAGE);
@@ -306,36 +305,44 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
 
     private void btnBuscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarIDActionPerformed
         // TODO add your handling code here:
-        Date f = new Date();
-        Product producto = new Product("x","x","x",0,0,f);
-        producto.setId(Integer.parseInt(this.txtID.getText()));
-        producto.buscarID();
-        if(ElectroTech.buscarID){
-            this.txtNombre.setText(producto.getNombre());
-            this.lblNombre.setText(producto.getNombre());
-            this.lblMarca.setText(producto.getMarca());
-            this.lblCategoria.setText(producto.getCategoria());
-            this.lblPrecio.setText(String.valueOf(producto.getPrecio()));
-            this.lblStock.setText(String.valueOf(producto.getCantidadEnStock()));
-            this.lblFecha.setText(String.valueOf(producto.getFecha()));
-            this.lblID.setText(String.valueOf(producto.getId()));
+        try{
+            Date f = new Date();
+            Product producto = new Product("x","x","x",0,0,f);
+            producto.setId(Integer.parseInt(this.txtID.getText()));
+            producto.buscarID();
+            if(ElectroTech.buscarID){
+                this.lblNom.setText(producto.getNombre());
+                this.lblMar.setText(producto.getMarca());
+                this.lblCategoria.setText(producto.getCategoria());
+                this.lblPrecio.setText(String.valueOf(producto.getPrecio()));
+                this.lblStock.setText(String.valueOf(producto.getCantidadEnStock()));
+                this.lblFecha.setText(String.valueOf(producto.getFecha()));
+                this.lblID.setText(String.valueOf(producto.getId()));     
+            }else{
+                JOptionPane.showMessageDialog(this, "Producto NO ENCONTRADO.","ERROR",2);
+                this.txtID.setText("");
+            }
+        }catch(Exception e){
+            System.out.println("ERROR en EVENTO en BOTÓN BUSCAR ID");
         }
-        
     }//GEN-LAST:event_btnBuscarIDActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarID;
-    private javax.swing.JButton btnBuscarN;
     private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -348,11 +355,10 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblID;
-    private javax.swing.JLabel lblMarca;
-    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblMar;
+    private javax.swing.JLabel lblNom;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblStock;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

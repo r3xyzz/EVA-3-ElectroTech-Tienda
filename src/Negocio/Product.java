@@ -220,9 +220,9 @@ public class Product {
     }
 }
     
-    public boolean validarNombre(String nombre) {
+    public boolean validarNombre(String nombre, int id) {
         try {
-            String sql = "select count(*) as count from product where nombre = '"+nombre+"'";
+            String sql = "select count(*) as count from product where nombre = '"+nombre+"' and id <> "+id+" ";
             ElectroTech.conectar();
             ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
             ResultSet res = ElectroTech.sentencia.executeQuery(sql);
@@ -234,6 +234,21 @@ public class Product {
         } catch (Exception e) {
             System.out.println("Error");  
             return false;
+        }
+    }
+    
+    public void actualizarID(){
+        try{
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaFormateada = formato.format(fecha);
+            String sql = "update PRODUCT set Nombre = '"+nombre+"', Marca = '"+marca+"', Categoria = '"+categoria+"', Precios = "+precio+", cantidadEnStock = "+cantidadEnStock+",fechaDeAdquisicion = '"+fechaFormateada+"' where id = '"+id+"' ";
+            ElectroTech.conectar();
+            ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
+            ElectroTech.sentencia.execute(sql);
+            System.out.println("Producto ACTUALIZADO");
+            ElectroTech.desconectar();
+        }catch(Exception e){
+            System.out.println("ERROR al actualizar producto");
         }
     }
     
