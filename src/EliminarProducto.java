@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-
+import Negocio.Product;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Benjamin Mateluna
@@ -216,6 +217,11 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
 
         btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEliminarProducto.setText("Eliminar");
+        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProductoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -264,6 +270,24 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
+        // TODO add your handling code here:
+        String idProducto = this.txtID.getText();
+        
+        if (idProducto!= null && !idProducto.isEmpty()){
+            Product productoAEliminar = new Product();
+            boolean eliminado = productoAEliminar.eliminarProducto(idProducto);
+            
+            if (eliminado){
+                JOptionPane.showMessageDialog(this, "Producto ELIMINADO exitosamente.");
+            }else{
+                JOptionPane.showMessageDialog(this, "No se encontró un producto con ese ID.","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "ID de producto INVÁLIDO.","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
