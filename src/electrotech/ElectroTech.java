@@ -7,7 +7,6 @@ package electrotech;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 /**
@@ -35,7 +34,7 @@ public class ElectroTech {
             System.out.println("e");
         }
     }
-
+    
     public static void desconectar() throws SQLException{
         conexion.close();
     }

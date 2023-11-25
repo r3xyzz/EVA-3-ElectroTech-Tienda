@@ -2,6 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
+import electrotech.ElectroTech;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,10 +41,10 @@ public class ListarProducto extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtCantmax = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonbuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableFull = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
 
         setClosable(true);
@@ -87,11 +92,11 @@ public class ListarProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonbuscar.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jButtonbuscar.setText("Buscar");
+        jButtonbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonbuscarActionPerformed(evt);
             }
         });
 
@@ -125,7 +130,7 @@ public class ListarProducto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCantmax, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonbuscar)))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,14 +150,14 @@ public class ListarProducto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
                         .addComponent(txtCantmax, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonbuscar)
                         .addComponent(jLabel4)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFull.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -163,7 +168,7 @@ public class ListarProducto extends javax.swing.JInternalFrame {
                 "ID", "Nombre", "Marca", "Categoria", "Precio", "Stock"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableFull);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -236,9 +241,83 @@ public class ListarProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCanminmActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+            // Obtener los valores de los campos de búsqueda
+    String categoria = txtCategoria.getText();
+    String canminm = txtCanminm.getText();
+    String cantmax = txtCantmax.getText();
+
+    // Construir la consulta SQL basada en los criterios de búsqueda
+    String sql = "SELECT * FROM product"; // Reemplaza "tu_tabla_de_productos" con el nombre real de tu tabla
+
+    if (!categoria.isEmpty() || !canminm.isEmpty() || !cantmax.isEmpty()) {
+        sql += " WHERE";
+
+        if (!categoria.isEmpty()) {
+            sql += " Categoria LIKE '%" + categoria + "%'";
+        }
+
+        if (!canminm.isEmpty()) {
+            if (!categoria.isEmpty()) {
+                sql += " AND";
+            }
+            sql += " Precios >= " + canminm;
+        }
+
+        if (!cantmax.isEmpty()) {
+            if (!categoria.isEmpty() || !canminm.isEmpty()) {
+                sql += " AND";
+            }
+            sql += " Precios <= " + cantmax;
+        }
+    }
+
+    // Realizar la consulta y llenar la tabla con los resultados
+    try {
+        ElectroTech.conectar();
+        ElectroTech.sentencia = ElectroTech.conexion.prepareStatement(sql);
+        ResultSet res = ElectroTech.sentencia.executeQuery();
+
+        DefaultTableModel modelo = (DefaultTableModel) jTableFull.getModel();
+        modelo.setRowCount(0);
+
+        // Asegurarse de que las columnas estén configuradas solo una vez
+        if (modelo.getColumnCount() == 0) {
+            modelo.addColumn("ID");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Marca");
+            modelo.addColumn("Categoria");
+            modelo.addColumn("Precios");
+            modelo.addColumn("Stock");
+        }
+
+        Object[] fila = new Object[6];
+        while (res.next()) {
+            fila[0] = res.getObject(1);
+            fila[1] = res.getObject(2);
+            fila[2] = res.getObject(3);
+            fila[3] = res.getObject(4);
+            fila[4] = res.getObject(5);
+            fila[5] = res.getObject(6);
+
+            modelo.addRow(fila);
+        }
+
+        jTableFull.setModel(modelo);
+    } catch (SQLException e) {
+        System.out.println(e);
+    } finally {
+        try {
+            ElectroTech.desconectar();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+
+    }//GEN-LAST:event_jButtonbuscarActionPerformed
+    
 
     private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
         // TODO add your handling code here:
@@ -246,12 +325,13 @@ public class ListarProducto extends javax.swing.JInternalFrame {
 
     private void txtCantmaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantmaxActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCantmaxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpiarCampo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonbuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -260,7 +340,7 @@ public class ListarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableFull;
     private javax.swing.JTextField txtCanminm;
     private javax.swing.JTextField txtCantmax;
     private javax.swing.JTextField txtCategoria;
