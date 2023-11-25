@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import java.awt.Desktop;
+import java.net.URI;
 /**
  *
  * @author r3xzz
@@ -31,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         Fondito = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
+        jButtonProyect = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuOPCIONES = new javax.swing.JMenu();
         jMenuItemAGREGAR = new javax.swing.JMenuItem();
@@ -53,20 +55,34 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButtonProyect.setText("Proyecto");
+        jButtonProyect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProyectActionPerformed(evt);
+            }
+        });
+
         Fondito.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Fondito.setLayer(jButtonProyect, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout FonditoLayout = new javax.swing.GroupLayout(Fondito);
         Fondito.setLayout(FonditoLayout);
         FonditoLayout.setHorizontalGroup(
             FonditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FonditoLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                .addGap(102, 102, 102))
+                .addGap(19, 19, 19)
+                .addComponent(jButtonProyect)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addGap(480, 480, 480))
         );
         FonditoLayout.setVerticalGroup(
             FonditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FonditoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonProyect)
+                .addGap(43, 43, 43))
         );
 
         jMenuOPCIONES.setText("Opciones");
@@ -174,6 +190,17 @@ public class Principal extends javax.swing.JFrame {
         Fondito.show();
     }//GEN-LAST:event_jMenuItemMODIFICARActionPerformed
 
+    private void jButtonProyectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProyectActionPerformed
+        // TODO add your handling code here:
+        try {
+        // Abre el enlace en el navegador web predeterminado
+        Desktop.getDesktop().browse(new URI("https://github.com/r3xyzz/EVA-3-ElectroTech-Tienda.git"));
+    } catch (Exception ex) {
+        // Maneja cualquier excepción que pueda ocurrir al abrir el enlace
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_jButtonProyectActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,6 +238,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Fondito;
+    private javax.swing.JButton jButtonProyect;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
